@@ -1,0 +1,32 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+<h1>You have {{ count }} incomplete task{{ count | pluralize:'s' }} to do</h1>
+
+
+{% for task in tasks %}
+    {% if task.complete == False %}
+    <div class="card mt-4 shadow p-3 mb-3 bg-body-tertiary rounded">
+        <div class="card-body">
+            <div class="d-inline-block">
+                <h5><small class="text-muted"><a href="{% url 'detail' task.id %}" class="text-decoration-none">
+                            {{ task.title }}</a></small></h5>
+            </div>
+            <div class="d-inline-block float-end">
+                <a href="{% url 'edit' task.id %}" class="text-decoration-none">Edit</a> |
+                <a href="{% url 'delete' task.id %}" class="text-decoration-none">Delete</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% empty %}
+<div class="row my-5">
+    <p>Your to do list is empty!</p>
+</div>
+{% endfor %}
+
+<div class="row row-cols-1">
+    <h5><a href="{% url 'create' %}" class="text-decoration-none">&#43; Create Task</a></h5>
+</div>
+
+{% endblock %}

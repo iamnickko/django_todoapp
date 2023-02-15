@@ -1,0 +1,20 @@
+{% extends 'todo/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<a href="{% url 'index' %}" class="text-decoration-none">&#8592; Go Back</a>
+
+<div class="row justify-content-center">
+    <div class="card my-5 shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 30rem;">
+        <div class="card-body px-5">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Update" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
